@@ -1,0 +1,25 @@
+email_composition:
+  description: >
+    Compose well-structured and engaging emails based on the key findings from the content provided on {topic}.
+    The actual content is : {lecture_content}
+    The email should:
+    1. Open with a natural introduction or context hook.
+    2. Provide a detailed report on the main findings.
+    3. Highlight actionable insights and recommendations.
+    4. Close with a clear call to action or next steps.
+  expected_output: >
+    A professionally written email that clearly communicates
+    the essence of the report and encourages engagement or next steps.
+  agent: email_drafter
+  output_file: output/email.json
+
+send_email:
+  description: >
+    Use the mail_sender agent to send the finalized email composed earlier.
+    The agent should use the provided tool with the report’s content as the HTML body.
+  expected_output: >
+    A confirmation message indicating whether the email was sent successfully or if an error occurred.
+  agent: mail_sender
+  context:
+    - email_composition
+  output_file: output/send_email.json
